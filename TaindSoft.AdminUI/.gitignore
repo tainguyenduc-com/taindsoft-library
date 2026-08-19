@@ -1,0 +1,23 @@
+# Per-project .gitignore for TaindSoft.AdminUI
+# .NET
+bin/
+obj/
+publish/
+*.user
+*.suo
+.vs/
+.vscode/
+*.pdb
+TestResults/
+
+# Node/web
+node_modules/
+dist/
+build/
+.vite/
+npm-debug.log*
+yarn-error.log
+
+# Misc
+*.log
+.DS_Store

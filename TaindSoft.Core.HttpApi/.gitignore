@@ -1,0 +1,17 @@
+# Per-project .gitignore for TaindSoft.Core.HttpApi
+bin/
+obj/
+*.user
+*.suo
+.vs/
+.vscode/
+TestResults/
+*.pdb
+
+# Web outputs
+wwwroot/_framework/
+wwwroot/_framework/*.wasm
+
+# Misc
+*.log
+.DS_Store

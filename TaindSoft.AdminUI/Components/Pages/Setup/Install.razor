@@ -1,0 +1,79 @@
+@page "/setup/install"
+@rendermode @(new InteractiveWebAssemblyRenderMode(prerender: false))
+@layout EmptyLayout
+<div class="max-w-sm gap-4 sm:min-w-sm">
+    <ShadcnCard Class="sm:mx-auto sm:w-full sm:max-w-md">
+        <ShadcnCardHeader>
+            <ShadcnCardTitle Class="text-center text-3xl font-extrabold">
+                System Installation
+            </ShadcnCardTitle>
+            <ShadcnCardDescription Class="text-center">
+                Setup the initial administrator account for TaindSoft
+            </ShadcnCardDescription>
+        </ShadcnCardHeader>
+        <ShadcnCardContent>
+            @if (!string.IsNullOrEmpty(ErrorMessage))
+            {
+                <ShadcnAlert Variant="destructive" Class="mb-4">
+                    <ShadcnAlertDescription>@ErrorMessage</ShadcnAlertDescription>
+                </ShadcnAlert>
+            }
+            @if (!string.IsNullOrEmpty(SuccessMessage))
+            {
+                <ShadcnAlert Variant="default" Class="mb-4 border-green-500 text-green-600 dark:text-green-400">
+                    <ShadcnAlertDescription>@SuccessMessage</ShadcnAlertDescription>
+                </ShadcnAlert>
+            }
+
+            @if (!IsInstalled)
+            {
+                <EditForm Model="@this" OnValidSubmit="@HandleSubmit">
+                    <DataAnnotationsValidator />
+                    <div class="space-y-4">
+                        <div>
+                            <ShadcnLabel>Email</ShadcnLabel>
+                            <ShadcnInput TValue="string" Type="email" @bind-Value="Email" />
+                            <ValidationMessage For="@(() => Email)" />
+                        </div>
+                        <div>
+                            <ShadcnLabel>Username</ShadcnLabel>
+                            <ShadcnInput TValue="string" @bind-Value="Username" />
+                            <ValidationMessage For="@(() => Username)" />
+                        </div>
+                        <div>
+                            <ShadcnLabel>FullName</ShadcnLabel>
+                            <ShadcnInput TValue="string" @bind-Value="FullName" />
+                        </div>
+                        <div>
+                            <ShadcnLabel>Password</ShadcnLabel>
+                            <ShadcnInput TValue="string" Type="password" @bind-Value="Password" />
+                            <ValidationMessage For="@(() => Password)" />
+                        </div>
+                        <div>
+                            <ShadcnLabel>Confirm Password</ShadcnLabel>
+                            <ShadcnInput TValue="string" Type="password" @bind-Value="ConfirmPassword" />
+                            <ValidationMessage For="@(() => ConfirmPassword)" />
+                        </div>
+                    </div>
+                    @if (!string.IsNullOrEmpty(ErrorMessage))
+                    {
+                        <ShadcnAlert Variant="destructive">
+                            <ShadcnAlertDescription>@ErrorMessage</ShadcnAlertDescription>
+                        </ShadcnAlert>
+                    }
+                    <ShadcnButton Type="submit" Disabled="@IsLoading" Class="w-full mt-4">
+                        @if (IsLoading)
+                        {
+                            <span>Installing...</span>
+                        }
+                        else
+                        {
+
+                            <span>Install</span>
+                        }
+                    </ShadcnButton>
+                </EditForm>
+            }
+        </ShadcnCardContent>
+    </ShadcnCard>
+</div>

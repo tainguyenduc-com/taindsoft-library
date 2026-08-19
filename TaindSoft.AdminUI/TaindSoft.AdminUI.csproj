@@ -1,0 +1,40 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <!-- Enable static web assets for CSS/JS distribution -->
+    <GenerateEmbeddedFilesManifest>true</GenerateEmbeddedFilesManifest>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Styles\**" />
+    <Content Remove="Styles\**" />
+    <EmbeddedResource Remove="Styles\**" />
+    <None Remove="Styles\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <SupportedPlatform Include="browser" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Blazor-ApexCharts" Version="7.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.Authorization" Version="10.0.11" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="10.0.11" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\css\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\TaindSoft.Core\TaindSoft.Core.csproj" />
+    <ProjectReference Include="..\..\themes\shadcn-admin\Shadcn.Admin.csproj" />
+  </ItemGroup>
+
+  <!-- Static web assets are automatically included from wwwroot by Razor SDK -->
+  <!-- No need for explicit Content ItemGroup - SDK handles it -->
+
+</Project>

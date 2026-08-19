@@ -1,0 +1,48 @@
+@* AdminSidebarMenu — Complete sidebar composition.
+    Includes:
+    - SidebarHeader: App title / workspace switcher (data-driven)
+    - SidebarContent: Menu groups (General + sections)
+    - SidebarFooter: User profile card
+*@
+@rendermode @(new InteractiveServerRenderMode(prerender: false))
+@* Sidebar header — App title with dropdown (matches TeamSwitcher pattern) *@
+<ShadcnSidebarHeader>
+    <ShadcnSidebarMenu>
+        <ShadcnSidebarMenuItem>
+            <ShadcnSidebarMenuButton Size="lg"
+                                     Class="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
+                                     @onclick="@HandleWorkspaceSelect">
+                <div class="flex aspect-square size-8 items-center justify-center rounded-lg bg-sidebar-primary text-sidebar-primary-foreground font-bold text-sm shrink-0">
+                    @(_workspace?.Name?.FirstOrDefault() ?? 'T')
+                </div>
+                <div class="grid flex-1 text-start text-sm leading-tight">
+                    <span class="truncate font-semibold">@(_workspace?.Name ?? "TaindSoft Admin")</span>
+                    <span class="truncate text-xs text-sidebar-foreground/70">@(_workspace?.Plan ?? "Workspace")</span>
+                </div>
+            </ShadcnSidebarMenuButton>
+        </ShadcnSidebarMenuItem>
+    </ShadcnSidebarMenu>
+</ShadcnSidebarHeader>
+
+@* Sidebar content — Menu groups and items *@
+<ShadcnSidebarContent>
+    @* Top-level items (e.g., Dashboard) in General group *@
+    @if (_topLevelItems.Count > 0)
+    {
+        <ShadcnNavGroup Title="General" Items="@MapToNavItems(_topLevelItems)" />
+    }
+
+    @* Grouped menu items by section *@
+    @foreach (var section in _menuBySection)
+    {
+        <ShadcnNavGroup Title="@section.Key" Items="@MapToNavItems(section.Value ?? [])" />
+    }
+</ShadcnSidebarContent>
+
+@* Sidebar footer — User profile *@
+@if (_user is not null)
+{
+    <ShadcnSidebarFooter>
+        <ShadcnNavUser User="@_user" SignOut="@HandleSignOut" />
+    </ShadcnSidebarFooter>
+}

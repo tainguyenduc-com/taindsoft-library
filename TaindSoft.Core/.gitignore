@@ -1,0 +1,19 @@
+# Per-project .gitignore for TaindSoft.Core
+# .NET
+bin/
+obj/
+publish/
+*.user
+*.suo
+.vs/
+.vscode/
+*.pdb
+TestResults/
+
+# NuGet
+*.nupkg
+packages/
+
+# Misc
+*.log
+.DS_Store

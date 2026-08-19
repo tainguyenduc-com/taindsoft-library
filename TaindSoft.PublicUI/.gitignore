@@ -1,0 +1,21 @@
+# Per-project .gitignore for TaindSoft.PublicUI
+# Node/web
+node_modules/
+dist/
+build/
+.vite/
+.env
+npm-debug.log*
+yarn-error.log
+
+# .NET (if present)
+bin/
+obj/
+.vs/
+.vscode/
+*.pdb
+TestResults/
+
+# Misc
+*.log
+.DS_Store

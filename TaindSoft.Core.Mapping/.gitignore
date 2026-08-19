@@ -1,0 +1,13 @@
+# Per-project .gitignore for TaindSoft.Core.Mapping
+bin/
+obj/
+*.user
+*.suo
+.vs/
+.vscode/
+TestResults/
+*.pdb
+
+# Misc
+*.log
+.DS_Store

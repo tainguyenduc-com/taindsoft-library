@@ -1,0 +1,44 @@
+
+
+@if (!string.IsNullOrWhiteSpace(Key))
+{
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="@Class" aria-hidden="true">
+        @((MarkupString)GetPathMarkup(Key!))
+    </svg>
+}
+
+@code {
+    [Parameter] public string? Key { get; set; }
+    [Parameter] public string Class { get; set; } = "h-5 w-5";
+
+    private static string GetPathMarkup(string key) => key switch
+    {
+        "users" => "<path stroke-linecap='round' stroke-linejoin='round' d='M18 18.72a9.094 9.094 0 0 0 3.742-.479 3 3 0 0 0-4.682-2.72m.94 3.198v-.75c0-1.17-.317-2.266-.87-3.207m0 0A5.97 5.97 0 0 0 15 12.75a5.97 5.97 0 0 0-2.13.405m4.26 0A5.97 5.97 0 0 1 15 12.75m0 0a5.97 5.97 0 0 0-2.13.405m0 0A5.97 5.97 0 0 0 9 18m3.87-4.845A5.97 5.97 0 0 0 9 12.75a5.97 5.97 0 0 0-2.13.405m0 0A5.97 5.97 0 0 0 3 18v.75m6-10.5a3 3 0 1 1 6 0 3 3 0 0 1-6 0Zm-6 3a2.25 2.25 0 1 1 4.5 0 2.25 2.25 0 0 1-4.5 0Zm12 0a2.25 2.25 0 1 1 4.5 0 2.25 2.25 0 0 1-4.5 0Z' />",
+        "user" => "<path stroke-linecap='round' stroke-linejoin='round' d='M15.75 6.75a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.5 20.118a7.5 7.5 0 0 1 15 0A17.933 17.933 0 0 1 12 21.75a17.933 17.933 0 0 1-7.5-1.632Z' />",
+        "cloud-upload" => "<path stroke-linecap='round' stroke-linejoin='round' d='M12 16v-4m0 0l3 3m-3-3-3 3M20 16.58A5 5 0 0 0 18.66 7.6 5.5 5.5 0 0 0 6 9.5 4.5 4.5 0 0 0 9 17h11z' />",
+        "cloud-arrow-up" => "<path stroke-linecap='round' stroke-linejoin='round' d='M7.5 15.75V12a4.5 4.5 0 019 0v3.75M12 3v9m0 0l-3-3m3 3 3-3' />",
+        "x" => "<path stroke-linecap='round' stroke-linejoin='round' d='M6 18L18 6M6 6l12 12' />",
+        "save" => "<path stroke-linecap='round' stroke-linejoin='round' d='M17 3H5a2 2 0 0 0-2 2v14l4-4h10a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2z' />",
+        "pencil" => "<path stroke-linecap='round' stroke-linejoin='round' d='M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 .375a48.667 48.667 0 013.75 0' />",
+        "trash" => "<path stroke-linecap='round' stroke-linejoin='round' d='M14.74 9l-.346 7.142A2 2 0 0112.404 18H11.596a2 2 0 01-1.99-1.858L9.26 9M6 7h12M10 3h4a1 1 0 011 1v1H9V4a1 1 0 011-1z' />",
+        "copy" => "<path stroke-linecap='round' stroke-linejoin='round' d='M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-1M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2' />",
+        "check" => "<path stroke-linecap='round' stroke-linejoin='round' d='M4.5 12.75l6 6 9-13.5' />",
+        "arrow-left" => "<path stroke-linecap='round' stroke-linejoin='round' d='M6.633 10.5c-.806 0-1.531-.446-1.847-1.08l-.351-.6a1.125 1.125 0 011.947-1.125l.351.6c.316.634 1.041 1.08 1.847 1.08h7.5a1.125 1.125 0 010 2.25h-7.5z' />",
+        "arrow-right" => "<path stroke-linecap='round' stroke-linejoin='round' d='M3 12l2.036-2.036a1.125 1.125 0 011.947 1.125L5.625 12a1.125 1.125 0 010 2.25h7.5a1.125 1.125 0 010 2.25h-7.5a1.125 1.125 0 01-1.947-1.125L3 12z' />",
+        "arrow-up" => "<path stroke-linecap='round' stroke-linejoin='round' d='M4.5 15.75l7.5-7.5 7.5 7.5' />",
+        "arrow-down" => "<path stroke-linecap='round' stroke-linejoin='round' d='M19.5 12.75l-7.5 7.5-7.5-7.5' />",
+        "eye" => "<path stroke-linecap='round' stroke-linejoin='round' d='M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178a1.012 1.012 0 010 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z' />",
+        "eye-slash" => "<path stroke-linecap='round' stroke-linejoin='round' d='M3.98 8.223A10.477 10.477 0 0112 4.5c4.655 0 8.688 2.998 10.019 7.244a1.523 1.523 0 01-1.062 2.079M15 12a3 3 0 11-6 0 3 3 0 016 0z' />",
+        "login" => "<path stroke-linecap='round' stroke-linejoin='round' d='M15.75 9V5.625A3.375 3.375 0 0012.375 2.25h-6.75A3.375 3.375 0 002.25 5.625v12A3.375 3.375 0 005.625 21h6.75a3.375 3.375 0 003.375-3.375V12M9 9l3 3m0 0l-3 3m3-3H5.625' />",
+        "logout" => "<path stroke-linecap='round' stroke-linejoin='round' d='M15.75 9V5.625A3.375 3.375 0 0012.375 2.25h-6.75A3.375 3.375 0 002.25 5.625v12A3.375 3.375 0 005.625 21h6.75a3.375 3.375 0 003.375-3.375V12m-10.5 0L9 9m0 0l-3 3m3-3h8.25' />",
+        "refresh" => "<path stroke-linecap='round' stroke-linejoin='round' d='M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99' />",
+        "arrow-clockwise" => "<path stroke-linecap='round' stroke-linejoin='round' d='M8.684 4.632a9.097 9.097 0 0110.036 0m-10.036 0a9.094 9.094 0 003.591 11.936m10.036 0a9.093 9.093 0 003.591-11.936m-10.036 11.936a9.094 9.094 0 01-10.037 0m10.037 0a9.093 9.093 0 003.591-11.936' />",
+        "plus-circle" => "<path stroke-linecap='round' stroke-linejoin='round' d='M12 9v3m0 0v3m0-6h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z' />",
+        "minus-circle" => "<path stroke-linecap='round' stroke-linejoin='round' d='M15 12H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z' />",
+        "plus" => "<path stroke-linecap='round' stroke-linejoin='round' d='M12 4.5v15m7.5-7.5h-15' />",
+        "minus" => "<path stroke-linecap='round' stroke-linejoin='round' d='M19.5 12h-15' />",
+        "plus-sm" => "<path stroke-linecap='round' stroke-linejoin='round' d='M12 6v6m0 0v6m0-12h6m-6 0H6' />",
+        "minus-sm" => "<path stroke-linecap='round' stroke-linejoin='round' d='M5 12h14' />",
+        _ => "<path stroke-linecap='round' stroke-linejoin='round' d='M12 4.5v15m7.5-7.5h-15' />"
+    };
+}

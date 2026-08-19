@@ -1,0 +1,33 @@
+@inherits LayoutComponentBase
+@* [Authorize] removed from layout — AuthorizeRouteView in Routes.razor handles auth
+   via <NotAuthorized> → SoftRedirectToLogin. Putting [Authorize] on a layout causes
+   AuthorizeRouteView to enter the Authorizing state indefinitely during SSR because
+   no AuthenticationStateProvider is available server-side for the admin context.
+
+   NOTE: @rendermode cannot be placed on a layout — Blazor cannot serialize RenderFragment
+   (Body) across a render mode boundary. Render mode is declared per-page instead. *@
+
+<HeadContent>
+    <link rel="stylesheet" href="@Assets["admin/css/app.min.css"]" />
+</HeadContent>
+
+<ShadcnAuthenticatedLayout SidebarVariant="sidebar" SidebarCollapsible="icon" DefaultOpen="@_sidebarDefaultOpen">
+    <SidebarContent>
+        @* AdminSidebarMenu composes: SidebarHeader (workspace switcher) +
+           SidebarContent (NavGroups) + SidebarFooter (user profile). *@
+        <AdminSidebarMenu />
+    </SidebarContent>
+    <HeaderEndContent>
+        <ShadcnThemeSwitch />
+        <ShadcnConfigDrawer />
+        <ShadcnProfileDropdown
+            UserName="@_userName"
+            UserEmail="@_userEmail"
+            Initials="@_userInitials"
+            AvatarSrc="@_avatarSrc"
+            OnSignOut="@HandleSignOut" />
+    </HeaderEndContent>
+    <ChildContent>
+        @Body
+    </ChildContent>
+</ShadcnAuthenticatedLayout>
